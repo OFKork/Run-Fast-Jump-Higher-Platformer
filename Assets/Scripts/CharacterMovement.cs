@@ -10,8 +10,16 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] bool facingRight = true;
     float moveHorizontal;
-    
-    
+
+
+    [Header("For Dashing")] 
+    [SerializeField] bool canDash = true;
+    [SerializeField] bool isDashing;
+    [SerializeField] float dashingPower = 24;
+    [SerializeField] float dashingTime = 0.2f;
+    [SerializeField] float dashingCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
+
     [Header("For Jumping")]
     [SerializeField] float jumpingForce = 1f;
     [SerializeField] LayerMask groundLayer;
@@ -19,9 +27,6 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private Vector2 groundCheckSize;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isJumping;
-
-
-
 
     [Header("For WallSliding")]
     [SerializeField] float wallSlideSpeed = 1f;
@@ -50,13 +55,20 @@ public class CharacterMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        
         Running();
         Jumping();
         WallJump();
         WallSlide();
         CheckWorld();
+
+        if (Input.GetKeyDown((KeyCode.LeftShift)) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
+    
 
     void Running()
     {
@@ -82,6 +94,26 @@ public class CharacterMovement : MonoBehaviour
         facingRight = !facingRight;
         
     }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravvity = rb2d.gravityScale;
+        rb2d.gravityScale = 0f;
+        rb2d.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        rb2d.gravityScale = originalGravvity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+
+    }
+
+
+
+
     void Jumping()
     {
         if(Input.GetButtonDown("Jump"))
