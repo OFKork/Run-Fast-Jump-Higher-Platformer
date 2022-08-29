@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - FallDetector
+  - Enemy
   layers:
   - Default
   - TransparentFX

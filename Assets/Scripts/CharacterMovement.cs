@@ -8,7 +8,7 @@ public class CharacterMovement : MonoBehaviour
 {
     [Header("For Movement")]
     [SerializeField] float moveSpeed = 1f;
-    [SerializeField] bool facingRight = true;
+    [SerializeField] bool facingRight = true; 
     float moveHorizontal;
 
 
