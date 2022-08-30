@@ -8064,7 +8064,6 @@ MonoBehaviour:
   wallJumpForce: {x: 35, y: 20}
   wallJumping: 0
   wallJumpDuration: 0.07
-  animator: {fileID: 0}
 --- !u!114 &1414745124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9417,7 +9416,7 @@ GameObject:
   - component: {fileID: 1949161843}
   m_Layer: 0
   m_Name: Enemies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
