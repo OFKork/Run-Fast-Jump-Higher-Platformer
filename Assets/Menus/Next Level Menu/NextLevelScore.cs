@@ -9,9 +9,11 @@ using UnityEngine.UI;
 
 public class NextLevelScore : MonoBehaviour
 {
+    // loads next level and Shows Score
     public TextMeshProUGUI yourScoreText;
 
 
+    // Tried Score System and never used it 
     void Start()
     {
         //Tried socre timer to next level scene text

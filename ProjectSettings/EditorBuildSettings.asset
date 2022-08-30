@@ -14,9 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScoreScreen.unity
     guid: bd4760e8347b7924c8ce2d05c8004ae0
-  - enabled: 1
-    path: Assets/Scenes/Level 1.unity
-    guid: 9c06ed27075a28041b1f060a85cc7fd6
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: d0d09f74a6d6f7b48a722e1957e628bc

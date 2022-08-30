@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    // Basic movement and checking facing right
     [Header("For Movement")]
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] bool facingRight = true; 
     float moveHorizontal;
 
-
+    // 1 time Dash
     [Header("For Dashing")] 
     [SerializeField] bool canDash = true;
     [SerializeField] bool isDashing;
@@ -20,6 +21,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] float dashingCooldown = 1f;
     [SerializeField] private TrailRenderer tr;
 
+    // Using ground layer and checking to  Jump 
     [Header("For Jumping")]
     [SerializeField] float jumpingForce = 1f;
     [SerializeField] LayerMask groundLayer;
@@ -28,6 +30,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] bool isGrounded;
     [SerializeField] bool isJumping;
 
+    
+    //Using wall Layer to slide
     [Header("For WallSliding")]
     [SerializeField] float wallSlideSpeed = 1f;
     [SerializeField] LayerMask wallLayer;
@@ -36,20 +40,23 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] bool isTouchingWall;
     [SerializeField] bool isWallSliding;
 
+    //Using wall Layer to jump
     [Header("For WallJumping")]
     [SerializeField] Vector2 wallJumpForce;
     [SerializeField] bool wallJumping;
     [SerializeField] float wallJumpDuration;
 
+    // Tried Some Animations
     /*[Header("For Animations")] 
     public Animator animator;
     */
     
+    // rigibody
     [Header("Other")]
     Rigidbody2D rb2d;
 
 
-    // Start is called before the first frame update
+    // rigidbody 
     void Start()
     {
         
@@ -57,7 +64,7 @@ public class CharacterMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // Calls all movements
     void Update()
     {
         
@@ -73,7 +80,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
     
-
+    // Running on horizontal code
     void Running()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
@@ -90,6 +97,8 @@ public class CharacterMovement : MonoBehaviour
 
         // animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
     }
+    
+    // For facing right way 
     void Flip()
     {
         Vector3 currentScale = gameObject.transform.localScale;
@@ -100,6 +109,7 @@ public class CharacterMovement : MonoBehaviour
         
     }
 
+    // 1 time Dash 
     private IEnumerator Dash()
     {
         canDash = false;
@@ -118,7 +128,7 @@ public class CharacterMovement : MonoBehaviour
 
 
 
-
+    // Checking ground and Jump
     void Jumping()
     {
         if(Input.GetButtonDown("Jump"))
@@ -137,6 +147,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    // If layer is a wall can do wall jump
     void WallJump()
     {
         if (wallJumping)
@@ -148,12 +159,14 @@ public class CharacterMovement : MonoBehaviour
             Running();
         }
     }
-
+    // Stops Wall Jump
     void StopWallJump()
     {
         wallJumping = false;
     }
 
+    
+    // Checking wall layer and not grounded can do wall slide
     void WallSlide()
     {
         if (isTouchingWall && !isGrounded && rb2d.velocity.y > -2 )
@@ -165,7 +178,7 @@ public class CharacterMovement : MonoBehaviour
             isWallSliding = false;
         }
         
-        //Wall slide
+        //Wall slide code
 
         if (isWallSliding)
         {
@@ -175,7 +188,7 @@ public class CharacterMovement : MonoBehaviour
     
     
     
-    
+    // Checking Layers
     void CheckWorld()
     {
         isGrounded = Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer);
@@ -183,6 +196,7 @@ public class CharacterMovement : MonoBehaviour
     }
 
 
+    // Wall and Ground Layer Gizmos
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

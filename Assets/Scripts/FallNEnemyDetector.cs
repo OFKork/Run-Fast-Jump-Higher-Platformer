@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class FallNEnemyDetector : MonoBehaviour
 {
-    Vector3 respawnPoint;
-    public GameObject fallDetector;
-    public GameObject Enemy;
     
-    // Start is called before the first frame update
+    Vector3 respawnPoint; //Create respawnpoint 
+    public GameObject fallDetector; // checking for fall collider   
+    public GameObject Enemy; // checking for enemy collider
+    
     void Start()
     {
         respawnPoint = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         fallDetector.transform.position = new Vector2(transform.position.x, fallDetector.transform.position.y);

@@ -8,6 +8,9 @@ using Unity.VisualScripting;
 
 public class TimerController : MonoBehaviour
 {
+    /// <summary>
+    ///  This code simply using for time counting on screens left corner and measuring for score system
+    /// </summary>
     public static TimerController instance; 
         
     public TextMeshProUGUI timer;
