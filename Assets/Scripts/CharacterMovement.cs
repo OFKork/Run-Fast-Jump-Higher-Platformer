@@ -40,6 +40,10 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] Vector2 wallJumpForce;
     [SerializeField] bool wallJumping;
     [SerializeField] float wallJumpDuration;
+
+    [Header("For Animations")] 
+    public Animator animator;
+    
     
     [Header("Other")]
     Rigidbody2D rb2d;
@@ -84,6 +88,7 @@ public class CharacterMovement : MonoBehaviour
             Flip();
         }
 
+        animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
     }
     void Flip()
     {
